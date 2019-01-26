@@ -7,7 +7,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -38,9 +40,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //Change exibition the map
+        mMap.setMapType( GoogleMap.MAP_TYPE_NORMAL);
+        // Add a marker in IBM and move the camera
+            LatLng IBM = new LatLng(43.649698, -79.396189);
+        //Add the títle of the locate
+        mMap.addMarker(
+                new MarkerOptions()
+                        .position( IBM )
+                        .title("IBM")
+                        /*.icon(
+                                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
+                        )*/
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.car_map))
+        );
+        //Zoom da câmera
+        mMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(IBM, 2)
+        );
     }
 }
