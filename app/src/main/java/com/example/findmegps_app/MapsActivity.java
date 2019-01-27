@@ -2,6 +2,7 @@ package com.example.findmegps_app;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -45,6 +46,53 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in IBM and move the camera
             LatLng IBM = new LatLng(43.649698, -79.396189);
         //Add the títle of the locate
+
+        //Adicionando evento de clique no mapa
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                Double latitude = latLng.latitude;
+                Double longitude = latLng.longitude;
+
+                Toast.makeText(MapsActivity.this,
+                        "onClick Lat: " + latitude + "long: " + longitude,
+                        Toast.LENGTH_SHORT).show();
+
+
+                mMap.addMarker(
+                        new MarkerOptions()
+                                .position( latLng )
+                                .title("IBM")
+                                .snippet("Descricao")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.car_map))
+                );
+
+            }
+        });
+
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+
+                Double latitude = latLng.latitude;
+                Double longitude = latLng.longitude;
+
+                Toast.makeText(MapsActivity.this,
+                        "onLong Lat: " + latitude + "long: " + longitude,
+                        Toast.LENGTH_SHORT).show();
+
+
+                mMap.addMarker(
+                        new MarkerOptions()
+                                .position( latLng )
+                                .title("IBM")
+                                .snippet("Descricao")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.car_map))
+                );
+            }
+        });
+
         mMap.addMarker(
                 new MarkerOptions()
                         .position( IBM )
